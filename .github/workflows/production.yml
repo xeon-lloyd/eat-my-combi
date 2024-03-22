@@ -19,9 +19,9 @@ jobs:
           password: ${{ secrets.SERVER1_KEY }} # raw password
           port: ${{ secrets.SERVER1_PORT }} # ssh 접속포트
           script: |
-            cd /home/${{ secrets.SERVER1_USER }}/secrets
+            cd /home/${{ secrets.SERVER1_USER }}/secrets-combi
             sudo git reset --hard
-            sudo git pull "https://${{ secrets.GH_USER_TOKEN }}@github.com/xeon-lloyd/deploy-secrects.git" eat-my-combi
+            sudo git pull "https://${{ secrets.GH_USER_TOKEN }}@github.com/xeon-lloyd/deploy-secrects.git"
             cd /home/${{ secrets.SERVER1_USER }}/eat-my-combi
             sudo git reset --hard
             sudo git pull "https://${{ secrets.GH_USER_TOKEN }}@github.com/xeon-lloyd/eat-my-combi.git" production
