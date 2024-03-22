@@ -1,0 +1,32 @@
+# production.yml
+name: production branch auto ci process script
+
+on:
+  push:
+    branches: [ production ]
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.SERVER1_IP }} # 인스턴스 IP
+          username: ${{ secrets.SERVER1_USER }} # ssh 아이디
+          password: ${{ secrets.SERVER1_KEY }} # raw password
+          port: ${{ secrets.SERVER1_PORT }} # ssh 접속포트
+          script: |
+            cd /home/${{ secrets.SERVER1_USER }}/secrets
+            sudo git reset --hard
+            sudo git pull "https://${{ secrets.GH_USER_TOKEN }}@github.com/xeon-lloyd/deploy-secrects.git" eat-my-combi
+            cd /home/${{ secrets.SERVER1_USER }}/eat-my-combi
+            sudo git reset --hard
+            sudo git pull "https://${{ secrets.GH_USER_TOKEN }}@github.com/xeon-lloyd/eat-my-combi.git" production
+            sudo npm i --force
+            sudo mv ./ecosystem.config.js.prod ./ecosystem.config.js
+            sudo mv ../secrets/env.js.prod ./public/js/env.js
+            sudo mv ../secrets/setting.js.prod ./backend/core/setting.js
+            sudo pm2 reload eat-my-combi
