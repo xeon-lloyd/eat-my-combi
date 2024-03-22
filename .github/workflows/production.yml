@@ -21,7 +21,7 @@ jobs:
           script: |
             cd /home/${{ secrets.SERVER1_USER }}/secrets-combi
             sudo git reset --hard
-            sudo git pull "https://${{ secrets.GH_USER_TOKEN }}@github.com/xeon-lloyd/deploy-secrects.git"
+            sudo git pull "https://${{ secrets.GH_USER_TOKEN }}@github.com/xeon-lloyd/deploy-secrects.git" eat-my-combi
             cd /home/${{ secrets.SERVER1_USER }}/eat-my-combi
             sudo git reset --hard
             sudo git pull "https://${{ secrets.GH_USER_TOKEN }}@github.com/xeon-lloyd/eat-my-combi.git" production
