@@ -1,0 +1,10 @@
+module.exports = {
+  apps : [{
+    name: 'eat-my-combi',
+    script: 'server.js',
+    instances: 1,
+    exec_mode  : "fork",
+    watch: false,
+    time: true,
+  }],
+};
