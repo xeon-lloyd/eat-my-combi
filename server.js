@@ -57,7 +57,7 @@ app.get('/:view(*)', function(req, res, next){
 /* 서버 시작 */
 server.listen(setting.serverPort, async function(){
     /* DB 연결 */
-    util.mysql.connect('combi');
+    //util.mysql.connect('combi');
 
     console.log("서버 시작")
 })
